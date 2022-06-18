@@ -6,6 +6,6 @@ WORKDIR /app
 RUN poetry install
 RUN poetry build
 RUN pip install .
-EXPOSE 5000
+EXPOSE 8000
 ENTRYPOINT [ "python" ]
-CMD [ "-m", "devops_exercise.main" ]
+CMD [ "-m", "gunicorn", "devops_exercise.main:app" ]
