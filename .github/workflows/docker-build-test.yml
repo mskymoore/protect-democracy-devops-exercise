@@ -1,0 +1,26 @@
+name: Test Container
+
+on:
+  push:
+    branches: [ "main", "skymoore/devops" ]
+  pull_request:
+    branches: [ "main", "skymoore/devops" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build and Push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: false
+        tags: devops-exercise
+        
+    - name: Test Container
+      run: docker run --rm devops-exercise:latest tests/tests.py
