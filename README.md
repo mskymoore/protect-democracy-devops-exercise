@@ -1,32 +1,50 @@
-# DevOps Exercise
+# Thingler API
 
-This project is meant to test skills for the VoteShield DevOps Engineer role. What it does is not that important.
+### build and install local
+```bash
+# install deps
+poetry install
+# build package
+poetry build
+# install package
+poetry install
+```
 
-See [./INSTRUCTIONS.md](./INSTRUCTIONS.md) to get started.
+### run tests local
+```bash
+# must have completed build and install
+poetry run python tests/tests.py
+```
 
-## Usage
+### run local development server
+```bash
+# must have completed build and install
+poetry run python devops_exercise/main.py
+```
 
-This exercise provides a "thing" REST API.
+### run local production server
+```bash
+# must have completed build and install
+poetry run python -m gunicorn devops_exercise.main:app
+```
 
-- `/things`: List all things
-- `/things/<id>`: List specific thing
+### build docker image
+```bash
+docker build -t devops-exercise .
+```
 
-## Install
+### test docker image
+```bash
+docker run --rm devops-exercise:latest tests/tests.py
+```
 
-- Install with [poetry](https://python-poetry.org/)
+### run docker image
+```bash
+docker run --rm -it -p 8000:8000/tcp devops-exercise:latest
+```
 
-## Development
-
-- Run `python app/main.py`
-
-## Deployment
-
-TODO
-
-## Testing
-
-- Run `python tests.py`
-
-## Credits
-
-- Inspiration from [bregman-arie/devops-exercises](https://github.com/bregman-arie/devops-exercises)
+### deployment
+  1. Update package version number to desired in ```pyproject.toml```
+  2. Commit and push branch to github
+  3. Create a release in github with a tag of the version number
+  4. Github action will package and push to dockerhub
