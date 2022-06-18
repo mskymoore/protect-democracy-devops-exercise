@@ -3,7 +3,7 @@
 
 import unittest
 
-from app import main
+from devops_exercise import main
 
 
 class TestCase(unittest.TestCase):

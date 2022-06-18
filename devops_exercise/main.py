@@ -11,7 +11,7 @@ from werkzeug.exceptions import NotFound
 file_dirname = os.path.dirname(os.path.realpath(__file__))
 app = Flask(__name__)
 
-with open(os.path.join(file_dirname, "..", "data", "things.json"), "r") as f:
+with open(os.path.join(file_dirname, "data", "things.json"), "r") as f:
     things = json.load(f)
 
 
